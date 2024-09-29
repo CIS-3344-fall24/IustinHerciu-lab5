@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 5 - JavaScript</title>
+  </head>
+  <body>
+    <h1>Lab 5 - Working with Objects and Strings</h1>
+
+    <h2>Object Structure & Creating Objects - Tasks 1, 2, 3, 4</h2>
+    <script>
+      // Task 1: Create an object student
+      let student = {
+        name: "Iustin Herciu",   // name
+        age: 24,                 // age
+        grade: "Junior",         // grade
+        introduce: function () {
+          console.log("Hi, I am " + student.name + " and I am " + student.age + " years old.");
+        }
+      };
+
+      // Task 2: Modify the student object
+      student.major = "IST";            // major
+      student.age = 25;                 // updated age
+      console.log(student);
+
+
+      // Task 3: Accessing properties and methods
+      console.log(student.name);
+      console.log(student.grade);
+
+      // call `introduce` method
+      student.introduce();
+
+
+      // Task 4: Nested Objects
+      student.address = {
+        city: "King of Prussia",
+        country: "United States of America"
+      };
+
+      // log city property
+      console.log(student.address.city);
+    </script>
+
+    <h2>Working with Strings - Task 5</h2>
+    <script>
+      // Task 5: String Methods
+      let message = " Hello, JavaScript! ";
+      let message2 = "This is CIS-3344.";
+      let message3 = "Hello, JavaScript!; Hello, JavaScript!; Hello, JavaScript!; Hello, JavaScript!";
+
+      // String toUpperCase()
+      console.log(message.toUpperCase());     // makes the whole string upper case
+
+      // String toLowerCase()
+      console.log(message.toLowerCase());     // makes the whole string lower case
+
+      // String concat()
+      console.log(message.concat(message2));    // combines 2 strings together
+
+      // String trim()
+      console.log(message.trim());    // trims white space from both sides of the string. doesn't change the original string
+
+      // String trimStart()
+      console.log(message.trimStart());   // trims white space from the front of the string
+
+      // String trimEnd()
+      console.log(message.trimEnd());     // trims white space from the end of the string
+
+      // String padStart()
+      // used to make the string a certain length by adding characters at the beginning.
+      // be careful! the .padStart() only adds padding if the target length is greater than the length of the original string.
+      // if I use `3` instead of `30`, the length of the string `message` is already longer than 3 (21 characters), so no padding is added.
+      console.log(message.padStart(30, "Hello"));
+
+      // String padEnd()
+      // same thing with .padEnd(), but it's added at the end of the string.
+      console.log(message.padEnd(30, "Hi"));
+
+
+      // String repeat()
+      console.log(message.repeat(3));   // repeats the string 3 times on the same line
+
+      // String replace()
+      console.log(message.replace("JavaScript", "Java"));     // replace a part of a string with another string. it is only the first occurrence
+
+      // String replaceAll()
+      // unlike replace() where it changes only the first occurrence, replaceAll() will replace all occurrences within the string.
+      console.log(message3.replaceAll("JavaScript", "Java"));
+
+      // String split()
+      // splits a string into an array of substrings, based on a specified separator.
+      // using (" "), the method will look for every space in the string and split the string at each space, creating the array of substrings.
+      console.log(message3.split(" "));
+
+      // String indexOf()
+      // used to find the position of the first occurrence of a specified value within the string.
+      // the value "javascript" is found at index 8
+      // if the value is not found, the method will return -1
+      console.log(message.indexOf("JavaScript"));
+
+
+      // String lastIndexOf()
+      // used to find the position (index) of the last occurrence of a specified value within a string
+      // it returns the index of the found value, but it searches from the end of the string toward the beginning
+      console.log(message3.lastIndexOf("Hello"));
+
+      // String search()
+      // returns the position of the first match
+      console.log(message3.search("JavaScript"));
+
+      // String match()
+      // searches for a match against a specified expression or string and returns an array containing the matched result.
+      // if no matches are found, returns null
+      console.log(message3.match("Java"));
+
+      // String matchAll()
+      // used to find all matches of a pattern in a string.
+      // it returns an iterator of all matches
+      // we use /JavaScript/g because it's a `regex` pattern. It tells the program to search for the string JavaScript
+      console.log(message3.matchAll(/JavaScript/g));
+
+      // String includes()
+      // returns true if a string contains a specified string. otherwise, it returns false
+      console.log(message3.includes("Hello"));
+
+      // String startsWith()
+      // returns true if a string starts with a specified string. otherwise returns false
+      // this will say false bc we are looking for JavaScript. if I had Hello it would say true
+      console.log(message3.startsWith("JavaScript"));
+
+      // String endsWith()
+      // returns true if a string ends with a specified string. otherwise, it returns false
+      // this will say true because it ends with JavaScript
+      console.log(message3.endsWith("JavaScript"));
+
+
+
+    </script>
+
+    <h2>If-Else Statements - Task 6</h2>
+    <script>
+      function checkGrade(grade){
+        if(grade > 90){
+          return"Excellent!";
+        } else if(grade >= 70 && grade < 90){
+          return "Good";
+        } else{
+          return "Needs Improvement!";
+        }
+      }
+
+      console.log(checkGrade(82.7));
+    </script>
+
+    <h2>For Loops - Task 7</h2>
+    <script>
+
+      let init = 5;
+      let calls = ["increment", "reset", "decrement"];
+
+      function createCounter(init) {
+        let currentVal = init;
+
+        return{
+          increment: function () {
+            currentVal++;
+            return currentVal;
+          },
+          decrement: function () {
+            currentVal--;
+            return currentVal;
+          },
+          reset: function () {
+            currentVal = init;
+            return currentVal;
+          }
+        };
+      }
+
+      function processCounterCalls(init, calls) {
+        let counter = createCounter(init);
+        let result = [];
+
+        for (let call of calls) {
+          result.push(counter[call]());
+        }
+
+        return result;
+      }
+
+      console.log(processCounterCalls(init, calls));
+    </script>
+
+    <h2>Creating and Modifying Arrays - Tasks 8, 9, 10</h2>
+    <script>
+      // Task 8: Creating and accessing arrays
+      let fruits = ["apple", "banana", "orange"];
+      console.log("First fruit:", fruits[0]);
+      console.log("Last fruit:", fruits[fruits.length - 1]);
+
+      // Task 9: Modifying arrays
+      fruits.push("grape");
+      fruits.shift();
+      console.log("Updated fruits array:", fruits);
+
+      // Task 10: Iterating over arrays
+      for (let i = 0; i < fruits.length; i++) {
+        console.log(fruits[i]);
+      }
+
+    </script>
+
+    <h2>Library System - Task 11</h2>
+    <script>
+      // Task 11: Book constructor and borrowBook function
+      function Book(title, author, yearPublished, isAvailable) {
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
+        this.isAvailable = isAvailable;
+
+        this.getDetails = function() {
+          return `Title: ${this.title}, Author: ${this.author}, Year: ${this.yearPublished}, Available: ${this.isAvailable ? "Yes" : "No"}`;
+        };
+      }
+
+      // Creating Books and Library
+      let book1 = new Book("Game of Thrones", "George R.R. Martin", 1996, true);
+      let book2 = new Book("The Lord Of The Rings", "J.R.R. Tolkien", 1954, true);
+      let book3 = new Book("Vicious", "V. E. Schwab", 2013, true);
+
+      let library = [book1, book2, book3];
+
+      library.forEach(book => console.log(book.getDetails()));
+
+      // Borrowing Books
+      function borrowBook(title) {
+        for (let i = 0; i < library.length; i++) {
+          if (library[i].title === title) {
+            if (library[i].isAvailable) {
+              library[i].isAvailable = false;
+              console.log(`You have successfully borrowed "${title}".`);
+            } else {
+              console.log(`Sorry, "${title}" is not available.`);
+            }
+            return;
+          }
+        }
+        console.log(`Book titled "${title}" not found in the library.`);
+      }
+
+      // Testing BorrowBook
+      borrowBook("Vicious");
+      borrowBook("2013");
+      borrowBook("Game of Thrones");
+      borrowBook("Unknown Book");
+
+    </script>
+  </body>
+</html>
